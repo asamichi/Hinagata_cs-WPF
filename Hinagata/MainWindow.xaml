@@ -1,0 +1,41 @@
+﻿<Window x:Class="Hinagata.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hinagata"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <!--Resouces 内で定数を利用するため「xmlns:System="clr-namespace:System;assembly=mscorlib"」を追加-->
+
+
+    <!--Resources 内で一括で特定のスタイルを指定して使いまわせる-->
+    <Window.Resources>
+        <System:Double x:Key="CommonFontSize">30</System:Double>
+        <Style TargetType="Button" x:Key="ValueBtn">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="35"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="BaseStackPanelCol">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="BaseStackPanelRow" BasedOn="{StaticResource BaseStackPanelCol}">
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+    </Window.Resources>
+
+    <StackPanel  x:Name="CenterPanel" Style="{StaticResource BaseStackPanelCol}">
+        <StackPanel x:Name="ButtonArea" Style="{StaticResource BaseStackPanelRow}">
+            <Button Style="{StaticResource ValueBtn}" x:Name="MinusBtn"  Content="-" Command="{Binding MinusBtnCommand}"></Button>
+            <Button Style="{StaticResource ValueBtn}" x:Name="PlusBtn" Content="+" Command="{Binding PlusBtnCommand}"></Button>
+        </StackPanel>
+        <!--{0} とかは、1つ目の Binding 値をそこに代入の意-->
+        <TextBlock x:Name="TestTextBox" FontSize="{StaticResource CommonFontSize}" Text="{Binding Cnt, Mode=OneWay, StringFormat='カウンター値： {0}'}"></TextBlock>
+        <TextBlock x:Name="InfoTextBox" FontSize="{StaticResource CommonFontSize}"></TextBlock>
+    </StackPanel>
+</Window>
