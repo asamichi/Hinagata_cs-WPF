@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Hinagata.Commands;
+using Hinagata.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 
-namespace Hinagata
+namespace Hinagata.ViewModels
 {
     internal class CntViewModel : ViewModelBase
     {

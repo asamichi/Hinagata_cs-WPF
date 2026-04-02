@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using System.Windows.Input;
+using Hinagata.Views;
+using Hinagata.Commands;
 
-namespace Hinagata
+namespace Hinagata.ViewModels
 {
 
     public class MainWindowViewModel
