@@ -12,9 +12,9 @@ namespace Hinagata.Models
     {
         public int Cnt { get; private set; }
 
-        public CntClass()
+        public CntClass(int initValue = 0)
         {
-            Cnt = 0;
+            Cnt = initValue;
         }
 
         public void Plus()

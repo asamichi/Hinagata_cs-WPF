@@ -1,4 +1,5 @@
-﻿using Hinagata.Commands;
+﻿using Hinagata.Commons;
+using Hinagata.Commands;
 using Hinagata.Models;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Hinagata.ViewModels
         //モデル側のメンバを持つ
         private readonly CntClass _model;
 
-
+        JsonStorage<string, int> cntStorage = new JsonStorage<string, int>("Cnt.json", new Dictionary<string, int>() { { "Value", 0 } });
         private readonly EasyCommand _plusBtnCommand;
         private readonly EasyCommand _minusBtnCommand;
 
@@ -28,7 +29,11 @@ namespace Hinagata.ViewModels
 
         public CntViewModel()
         {
-            _model = new CntClass();
+
+
+            Dictionary<string, int> saveData = cntStorage.LoadJson();
+            
+            _model = new CntClass(saveData["Value"]);
 
             //それぞれのEasyCommand 型の中身を具体的に初期化する。OnPropertyChanged する必要があるのでこのクラスのメソッドを経由させる必要がある。
             _plusBtnCommand = new EasyCommand(_ => ExecPlus());
@@ -41,6 +46,9 @@ namespace Hinagata.ViewModels
             _model.Plus();
             OnPropertyChanged(nameof(Cnt));
             _minusBtnCommand.RaiseCanExecuteChanged();
+
+            //保存
+            cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
         }
 
         private void ExecMinus()
@@ -48,6 +56,10 @@ namespace Hinagata.ViewModels
             _model.Minus();
             OnPropertyChanged(nameof(Cnt));
             _minusBtnCommand.RaiseCanExecuteChanged();
+
+            //保存
+            cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
+
         }
 
 
