@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Hinagata"
         mc:Ignorable="d"
         Title="CntWindow" Height="450" Width="800"
-        xmlns:System="clr-namespace:System;assembly=mscorlib">
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
+        xmlns:views="clr-namespace:Hinagata.Views">
     <!--Resouces 内で定数を利用するため「xmlns:System="clr-namespace:System;assembly=mscorlib"」を追加-->
 
 
@@ -30,12 +31,8 @@
     </Window.Resources>
 
     <StackPanel  x:Name="CenterPanel" Style="{StaticResource BaseStackPanelCol}">
-        <StackPanel x:Name="ButtonArea" Style="{StaticResource BaseStackPanelRow}">
-            <Button Style="{StaticResource ValueBtn}" x:Name="MinusBtn"  Content="-" Command="{Binding MinusBtnCommand}"></Button>
-            <Button Style="{StaticResource ValueBtn}" x:Name="PlusBtn" Content="+" Command="{Binding PlusBtnCommand}"></Button>
-        </StackPanel>
-        <!--{0} とかは、1つ目の Binding 値をそこに代入の意-->
-        <TextBlock x:Name="TestTextBox" FontSize="{StaticResource CommonFontSize}" Text="{Binding Cnt, Mode=OneWay, StringFormat='カウンター値： {0}'}"></TextBlock>
-        <TextBlock x:Name="InfoTextBox" FontSize="{StaticResource CommonFontSize}"></TextBlock>
+        <views:CntView x:Name="CntView"/>
+        <Separator/>
+        <views:EvenOddView x:Name="EvenOddView"/>
     </StackPanel>
 </Window>

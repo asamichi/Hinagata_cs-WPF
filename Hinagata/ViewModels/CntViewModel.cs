@@ -10,13 +10,13 @@ using System.Windows.Input;
 
 namespace Hinagata.ViewModels
 {
-    internal class CntViewModel : ViewModelBase
+    public class CntViewModel : ViewModelBase
     {
 
         //モデル側のメンバを持つ
         private readonly CntClass _model;
+        JsonStorage<string, int> _cntStorage;
 
-        JsonStorage<string, int> cntStorage = new JsonStorage<string, int>("Cnt.json", new Dictionary<string, int>() { { "Value", 0 } });
         private readonly EasyCommand _plusBtnCommand;
         private readonly EasyCommand _minusBtnCommand;
 
@@ -27,39 +27,53 @@ namespace Hinagata.ViewModels
         //バインディング用のメンバは、モデル側の対応する値を直接参照するようにすればよい。
         public int Cnt => _model.Cnt;
 
-        public CntViewModel()
+        public CntViewModel(CntClass model, JsonStorage<string,int> storage)
         {
 
 
-            Dictionary<string, int> saveData = cntStorage.LoadJson();
-            
-            _model = new CntClass(saveData["Value"]);
+            //Dictionary<string, int> saveData = cntStorage.LoadJson();
+            _cntStorage = storage;
+            Dictionary<string, int> saveData = _cntStorage.LoadJson();
+
+            //_model = new CntClass(saveData["Value"]);
+            _model = model;
+            _model.ChangeCnt(saveData["Value"]);
 
             //それぞれのEasyCommand 型の中身を具体的に初期化する。OnPropertyChanged する必要があるのでこのクラスのメソッドを経由させる必要がある。
             _plusBtnCommand = new EasyCommand(_ => ExecPlus());
             _minusBtnCommand = new EasyCommand(_ => ExecMinus(),_ => _model.CanMinus());
+
+            //変更時のイベントを登録
+            _model.CntChanged += OnCntChanged;
         }
 
         //モデル側は WPF の話を知らないので、OnPropertyChanged はこちら側で受け持つ必要がある点に注意
         private void ExecPlus()
         {
             _model.Plus();
-            OnPropertyChanged(nameof(Cnt));
+            //イベント登録しているので、こちら側で改めて OnPropertyChanged は必要ない
+            //OnPropertyChanged(nameof(Cnt));
             _minusBtnCommand.RaiseCanExecuteChanged();
 
             //保存
-            cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
+            _cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
         }
 
         private void ExecMinus()
         {
             _model.Minus();
-            OnPropertyChanged(nameof(Cnt));
+            //イベント登録しているので、こちら側で改めて OnPropertyChanged は必要ない
+            //OnPropertyChanged(nameof(Cnt));
             _minusBtnCommand.RaiseCanExecuteChanged();
 
             //保存
-            cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
+            _cntStorage.SaveJson(new Dictionary<string, int>() { { "Value", Cnt } });
 
+        }
+
+        private void OnCntChanged()
+        {
+            OnPropertyChanged(nameof(Cnt));
         }
 
 

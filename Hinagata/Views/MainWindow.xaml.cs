@@ -27,8 +27,6 @@ namespace Hinagata.Views
             InitializeComponent();
             // result をバインディングの対象に指定
             CenterPanel.DataContext = result;
-
-            NewWindowBtn.DataContext = new MainWindowViewModel();
         }
     };
 

@@ -10,21 +10,31 @@ namespace Hinagata.Models
 
     public class CntClass
     {
+        //値変更時のイベント
+        public event Action? CntChanged;
         public int Cnt { get; private set; }
 
         public CntClass(int initValue = 0)
         {
-            Cnt = initValue;
+            ChangeCnt(initValue);
         }
 
         public void Plus()
         {
-            Cnt++;
+            ChangeCnt(Cnt + 1);
         }
 
         public void Minus()
         {
-            Cnt--;
+            ChangeCnt(Cnt - 1);
+        }
+
+
+        //毎回2行書くことの防止と、初期化以外で値をセットするため
+        public void ChangeCnt(int value)
+        {
+            Cnt = value;
+            CntChanged?.Invoke();
         }
 
         //CanExecuteChangedのため

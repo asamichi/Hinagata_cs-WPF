@@ -29,16 +29,20 @@
         </Style>
     </Window.Resources>
 
-    <StackPanel  x:Name="CenterPanel" Style="{StaticResource BaseStackPanelCol}">
-        <StackPanel x:Name="ButtonArea" Style="{StaticResource BaseStackPanelRow}">
-            <Button Style="{StaticResource ValueBtn}" x:Name="MinusBtn"  Content="--" Command="{Binding  DoubleMinusBtnCommand}"></Button>
-            <Button Style="{StaticResource ValueBtn}" x:Name="PlusBtn" Content="++" Command="{Binding  DoublePlusBtnCommand}"></Button>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" x:Name="CenterPanel" Style="{StaticResource BaseStackPanelCol}">
+            <StackPanel x:Name="ButtonArea" Style="{StaticResource BaseStackPanelRow}">
+                <Button Style="{StaticResource ValueBtn}" x:Name="MinusBtn"  Content="--" Command="{Binding  DoubleMinusBtnCommand}"></Button>
+                <Button Style="{StaticResource ValueBtn}" x:Name="PlusBtn" Content="++" Command="{Binding  DoublePlusBtnCommand}"></Button>
+            </StackPanel>
+            <!--{0} とかは、1つ目の Binding 値をそこに代入の意-->
+            <TextBlock x:Name="TestTextBox" FontSize="{StaticResource CommonFontSize}" Text="{Binding Cnt, Mode=OneWay, StringFormat='カウンター値： {0}'}"></TextBlock>
+            <TextBlock x:Name="InfoTextBox" FontSize="{StaticResource CommonFontSize}"></TextBlock>
         </StackPanel>
-        <!--{0} とかは、1つ目の Binding 値をそこに代入の意-->
-        <TextBlock x:Name="TestTextBox" FontSize="{StaticResource CommonFontSize}" Text="{Binding Cnt, Mode=OneWay, StringFormat='カウンター値： {0}'}"></TextBlock>
-        <TextBlock x:Name="InfoTextBox" FontSize="{StaticResource CommonFontSize}"></TextBlock>
-        <Button  x:Name="NewWindowBtn" Content="MVVM で実装したウィンドウを開く" Command="{Binding OpenMVVMWindow}"/>
-    </StackPanel>
-
-    
+        <Button Grid.Row="1"  x:Name="NewWindowBtn" Content="MVVM で実装したウィンドウを開く" Command="{Binding OpenMVVMWindow}"/>
+    </Grid>
 </Window>
