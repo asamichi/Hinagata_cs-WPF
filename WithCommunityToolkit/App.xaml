@@ -1,0 +1,17 @@
+﻿<Application x:Class="WithCommunityToolkit.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WithCommunityToolkit"
+             xmlns:vm="clr-namespace:WithCommunityToolkit.ViewModels"
+             xmlns:views="clr-namespace:WithCommunityToolkit.Views">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type vm:CntViewModel}">
+            <views:CntView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:EvenOddViewModel}">
+            <views:EvenOddView/>
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
