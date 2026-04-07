@@ -33,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" x:Name="CenterPanel" Style="{StaticResource BaseStackPanelCol}">
             <StackPanel x:Name="ButtonArea" Style="{StaticResource BaseStackPanelRow}">
@@ -44,5 +45,6 @@
             <TextBlock x:Name="InfoTextBox" FontSize="{StaticResource CommonFontSize}"></TextBlock>
         </StackPanel>
         <Button Grid.Row="1"  x:Name="NewWindowBtn" Content="MVVM で実装したウィンドウを開く" Command="{Binding OpenMVVMWindow}"/>
+        <Button Grid.Row="2"  x:Name="NewWindowBtn2" Content="コンテンツコントロールで実装したウィンドウを開く" Command="{Binding OpenCCWindow}"/>
     </Grid>
 </Window>

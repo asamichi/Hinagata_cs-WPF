@@ -28,6 +28,16 @@ namespace Hinagata
             var evenOddViewModel = new EvenOddViewModel(model);
 
 
+            //コンテンツコントロールのウィンドウ用
+
+            var contentControlCntViewModel = new ContentControlCntViewModel(cntViewModel, evenOddViewModel);
+
+            Action openCCWindowAction = () =>
+            {
+                var CCWindow = new ContentControlTest();
+                CCWindow.DataContext = contentControlCntViewModel;
+                CCWindow.Show();
+            };
 
             //始めに開くウィンドウを作成
             var mainWindow = new MainWindow();
@@ -41,9 +51,12 @@ namespace Hinagata
                 mvvmWindow.Show();
             };
 
-            var mainWindowViewModel = new MainWindowViewModel(openMVVMWindowAction);
+            var mainWindowViewModel = new MainWindowViewModel(openMVVMWindowAction,openCCWindowAction);
             mainWindow.DataContext = mainWindowViewModel;
             mainWindow.Show();
+
+
+
         }
     }
 

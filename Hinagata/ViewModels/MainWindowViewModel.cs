@@ -12,10 +12,13 @@ namespace Hinagata.ViewModels
     public class MainWindowViewModel
     {
         private readonly Action _openMVVMWindowAction;
+        private readonly Action _openCCWindowAction;
+
         //コンストラクタで必要な情報を受け取る
-        public MainWindowViewModel(Action openMVVMWindowAction)
+        public MainWindowViewModel(Action openMVVMWindowAction, Action openCCWindowAction)
         {
             _openMVVMWindowAction = openMVVMWindowAction;
+            _openCCWindowAction = openCCWindowAction;
         }
 
         
@@ -30,6 +33,11 @@ namespace Hinagata.ViewModels
 
             ////表示
             //mvvmWindow.Show();
+        });
+
+        public ICommand OpenCCWindow => new EasyCommand(_ =>
+        {
+            _openCCWindowAction?.Invoke();
         });
     }
 }
