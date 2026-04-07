@@ -39,7 +39,7 @@ public partial class CntViewModel : ObservableObject
 
 
     [ObservableProperty] //先頭小文字のフィールドを宣言すると、対応する先頭が大文字版のプロパティを自動作成
-    [NotifyCanExecuteChangedFor(nameof(ExecMinusCommand))] //当該プロパティ変更時、自動的に DecrementCommand の CanExecute の評価が実施。DecrementCommand は直接宣言する必要はなく、[対応するメソッド]Coomand が自動生成される
+    [NotifyCanExecuteChangedFor(nameof(ExecMinusCommand))] //当該プロパティ変更時、自動的に ExecMinusCommand の CanExecute の評価が実施。ExecMinusCommand は直接宣言する必要はなく、[対応するメソッド]Coomand が自動生成される
     private int cnt;
 
     [RelayCommand]//この属性をメソッドにつけると、[メソッド名]Command が自動生成される。ICommand が必要なくなる
